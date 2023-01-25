@@ -5,7 +5,7 @@ using iPantry.Services;
 
 namespace iPantry.Controllers
 {
-    //[Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     
     public class PantryItemController : ControllerBase
@@ -24,7 +24,7 @@ namespace iPantry.Controllers
             {
                 return Ok(await _pantryItemService.GetPantryItem(id));
             }
-            catch (Exception ex) 
+            catch (Exception) 
             {
                 return NotFound("Pantry item not found.");
             };

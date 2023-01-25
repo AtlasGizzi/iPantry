@@ -5,7 +5,7 @@ using iPantry.Models;
 
 namespace iPantry.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RecipeController : Controller
     {

@@ -10,6 +10,7 @@ namespace iPantry
         public DbSet<Recipe> recipes { get; set; }
         public DbSet<PantryItem> pantryItems { get; set; }
         public DbSet<IngredientItem> ingredientItems { get; set;}
+        public DbSet<Pantry> pantries { get; set; }
 
     }
 }

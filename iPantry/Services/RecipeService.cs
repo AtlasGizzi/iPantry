@@ -21,9 +21,14 @@ namespace iPantry.Services
         [HttpPost]
         public async Task<ActionResult<Recipe>> AddRecipe(Recipe recipe) 
         {
-            _dataContext.recipes.Add(recipe);
-            await _dataContext.SaveChangesAsync();
-            return await _dataContext.recipes.ToListAsync();
+            var recipeNameExists = await _dataContext.recipes.FirstOrDefaultAsync(r => r.Name == recipe.Name);
+            if (recipeNameExists == null)
+            {
+                _dataContext.recipes.Add(recipe);
+                await _dataContext.SaveChangesAsync();
+                return recipe;
+            }
+            throw new Exception("Recipe name already exists.");
         }
     }
 }

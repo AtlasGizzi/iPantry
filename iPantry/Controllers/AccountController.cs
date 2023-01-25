@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iPantry.Controllers
 {
-    //[Route("api/Account")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : ControllerBase //controllerBase specifies that we are using HTTP responses?
     {
-        private readonly AccountService _accountService;
-        public AccountController(AccountService accountService)
+        private readonly AccountService _accountService; // this creates a class property that is private and read only
+        public AccountController(IAccountService accountService) // when the controller is called it creates an instance of the account service. 
         {
-            _accountService = accountService;
+            _accountService = (AccountService?)accountService; // each instance of the account service is equivient to the account service
         }
 
         [HttpPost]
@@ -21,6 +21,12 @@ namespace iPantry.Controllers
         { 
             await _accountService.Register(account);
             return Ok();
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<Account>>> GetAll()
+        {
+            var accounts = await _accountService.GetAll();
+            return Ok(accounts);
         }
     }
 }

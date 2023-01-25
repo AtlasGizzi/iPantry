@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iPantry.Controllers
 {
-   
-    
-        [ApiController]
+
+    [Route("api/[controller]")]
+    [ApiController]
         public class PantryController : ControllerBase
         {
             private readonly PantryService _pantryService;
@@ -23,6 +23,12 @@ namespace iPantry.Controllers
                 await _pantryService.CreatePantry(pantry);
                 return Ok();
             }
+            [HttpGet("{id}")]
+            public async Task<ActionResult<Pantry>> GetPantryById(int id)
+            {
+            return Ok(await _pantryService.GetPantryById(id));
+            }
+
         }
     
 }
